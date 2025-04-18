@@ -24,6 +24,8 @@ services:
       POSTGRES_PASSWORD: posty_password
     volumes:
       - ./docker/postgres/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     networks:
       - posty_network
 
