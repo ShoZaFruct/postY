@@ -18,10 +18,7 @@ readonly class UserService
     ) {
     }
 
-    /**
-     * @throws UserExistsException
-     */
-    public function createUser(CreateUserRequest $request): void
+    public function createUser(CreateUserRequest $request): string
     {
         if (null !== $this->userRepository->findByUsername(username: $request->username)) {
             throw new UserExistsException();
@@ -35,5 +32,7 @@ readonly class UserService
         );
         $user->setPassword($hashedPassword);
         $this->userRepository->save(user: $user);
+
+        return $user->getUsername();
     }
 }

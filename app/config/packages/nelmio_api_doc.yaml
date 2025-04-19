@@ -1,0 +1,13 @@
+nelmio_api_doc:
+  documentation:
+    info:
+      title: PostY API
+      description: API Documentation
+      version: 1.0.0
+    servers:
+      - url: https://example.com
+        description: Main API server
+  areas:
+    default:
+      path_patterns:
+        - ^/api/v1(?!/doc$)

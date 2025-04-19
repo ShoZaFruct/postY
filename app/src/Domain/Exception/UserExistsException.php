@@ -7,6 +7,6 @@ class UserExistsException extends \Exception
     public function __construct(
         string $message = 'User already exists.'
     ) {
-        parent::__construct($message, 500);
+        parent::__construct($message, 422);
     }
 }
