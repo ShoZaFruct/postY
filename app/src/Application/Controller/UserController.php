@@ -18,10 +18,12 @@ class UserController extends AbstractController
 {
 
     #[OA\Post(
-        path: '/user/create',
+        path: '/api/v1/user/create',
         description: 'Создание пользователя',
         requestBody: new OA\RequestBody(
-            ref: new Model(type: CreateUserCommand::class, groups: ['default']),
+            content: new OA\JsonContent(
+                ref: new Model(type: CreateUserCommand::class, groups: ['default']),
+            )
         ),
         responses: [
             new OA\Response(
