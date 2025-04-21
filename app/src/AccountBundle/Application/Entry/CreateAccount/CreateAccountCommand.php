@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Entry\CreateUser;
+namespace App\AccountBundle\Application\Entry\CreateAccount;
 
 use OpenApi\Attributes as OA;
 
@@ -13,7 +13,7 @@ use OpenApi\Attributes as OA;
         new OA\Property(property: 'password', description: 'Пароль пользователя', type: 'string', nullable: false),
     ]
 )]
-readonly class CreateUserCommand
+readonly class CreateAccountCommand
 {
     public function __construct(
         public string $username,

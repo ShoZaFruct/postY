@@ -1,6 +1,7 @@
-posty_api:
+account_bundle:
     resource:
-        path: ../src/Application/Controller/
-        namespace: App\Application\Controller
+        path: ../src/AccountBundle/Application/Controller/
+        namespace: App\AccountBundle\Application\Controller
     type: attribute
-    prefix: /api/v1
+    prefix: /api/v1/account
+    name_prefix: account_

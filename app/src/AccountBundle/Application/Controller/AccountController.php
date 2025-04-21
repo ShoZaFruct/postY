@@ -2,27 +2,31 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Controller;
+namespace App\AccountBundle\Application\Controller;
 
-use App\Application\Entry\CreateUser\CreateUserCommand;
-use App\Application\Entry\CreateUser\CreateUserHandler;
+use App\AccountBundle\Application\Entry\CreateAccount\CreateAccountCommand;
+use App\AccountBundle\Application\Entry\CreateAccount\CreateAccountHandler;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/user', name: 'user_')]
-class UserController extends AbstractController
+class AccountController extends AbstractController
 {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+    ) {
+    }
 
     #[OA\Post(
-        path: '/api/v1/user/create',
+        path: '/api/v1/account/create',
         description: 'Создание пользователя',
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(
-                ref: new Model(type: CreateUserCommand::class, groups: ['default']),
+                ref: new Model(type: CreateAccountCommand::class, groups: ['default']),
             )
         ),
         responses: [
@@ -39,7 +43,7 @@ class UserController extends AbstractController
                 description: 'Ошибка: пользователь существует',
                 content: new OA\JsonContent(
                     type: 'string',
-                    example: 'User already exists.',
+                    example: 'Account already exists.',
                 ),
             )
         ]
@@ -47,13 +51,20 @@ class UserController extends AbstractController
     #[Route(path: '/create', name: 'create', methods: ['POST'])]
     public function createUser(
         Request $request,
-        CreateUserHandler $createUserHandler,
+        CreateAccountHandler $createAccountHandler,
     ): JsonResponse {
+        $data = json_decode($request->getContent(), true);
+
+        $this->logger->debug('account_create_post_data', [
+            'username' => $data['username'],
+            'password' => $data['password'],
+        ]);
+
         return $this->json(
-            ($createUserHandler)(
-                new CreateUserCommand(
-                    username: $request->get('username'),
-                    password: $request->get('password'),
+            ($createAccountHandler)(
+                new CreateAccountCommand(
+                    username: $data['username'],
+                    password: $data['password'],
                 )
             )
         );
