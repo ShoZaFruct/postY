@@ -23,7 +23,7 @@ class AccountController extends AbstractController
 
     #[OA\Post(
         path: '/api/v1/account/create',
-        description: 'Создание пользователя',
+        description: 'Создание аккаунта',
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(
                 ref: new Model(type: CreateAccountCommand::class, groups: ['default']),

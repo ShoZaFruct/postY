@@ -15,9 +15,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Account implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column()]
-    private $id;
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255, unique: true, nullable: false)]
     private string $username;

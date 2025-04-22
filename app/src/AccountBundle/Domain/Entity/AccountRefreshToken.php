@@ -11,9 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 class AccountRefreshToken
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column()]
-    private $id;
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id;
 
     #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'refresh_tokens')]
     #[ORM\JoinTable()]

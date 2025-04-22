@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\AccountBundle\Domain\DTO\Request;
+namespace App\AccountBundle\Application\Entry\LoginAccount;
 
-readonly class LoginAccountRequest
+readonly class LoginAccountCommand
 {
     public function __construct(
         public string $username,
