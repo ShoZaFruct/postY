@@ -5,3 +5,11 @@ account_bundle:
     type: attribute
     prefix: /api/v1/account
     name_prefix: account_
+
+post_bundle:
+    resource:
+        path: ../src/PostBundle/Application/Controller/
+        namespace: App\PostBundle\Application\Controller
+    type: attribute
+    prefix: /api/v1/post
+    name_prefix: post_

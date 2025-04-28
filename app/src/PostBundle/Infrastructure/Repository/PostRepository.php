@@ -6,6 +6,7 @@ namespace App\PostBundle\Infrastructure\Repository;
 
 use App\AccountBundle\Domain\Entity\Account;
 use App\PostBundle\Domain\Entity\Post;
+use App\PostBundle\Domain\Exception\PostNotFoundException;
 use App\PostBundle\Domain\Repository\PostRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
@@ -21,6 +22,19 @@ readonly class PostRepository implements PostRepositoryInterface
     ) {
         $this->entityManager = $entityManager;
         $this->repository = $this->entityManager->getRepository(Post::class);
+    }
+
+    public function findByUuidAndAccountExact(string $uuid, Account $account): ?Post
+    {
+        $result = $this->repository->createQueryBuilder('post')
+            ->where('post.uuid = :uuid')
+            ->andWhere('post.account = :account')
+            ->setParameter('uuid', $uuid)
+            ->setParameter('account', $account)
+            ->getQuery()->getResult();
+
+        return false === empty($result) ? current($result)
+            : throw new PostNotFoundException();
     }
 
     public function findByUuid(string $uuid): ?Post
@@ -40,6 +54,13 @@ readonly class PostRepository implements PostRepositoryInterface
     {
         $this->entityManager->persist($post);
         $this->entityManager->flush();
+    }
+
+    public function update(Post $post): Post
+    {
+        $this->entityManager->flush();
+
+        return $post;
     }
 
     public function delete(Post $post): void

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 #[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Table(name: 'post')]
 class Post
 {
@@ -39,12 +40,10 @@ class Post
         Account $account,
         string $title,
         string $content,
-        \DateTimeInterface $createdAt,
     ) {
         $this->account = $account;
         $this->title = $title;
         $this->content = $content;
-        $this->createdAt = $createdAt;
     }
 
     public function getUuid(): ?string
@@ -62,9 +61,19 @@ class Post
         return $this->title;
     }
 
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
     }
 
     public function getCreatedAt(): \DateTimeInterface
@@ -72,13 +81,20 @@ class Post
         return $this->createdAt;
     }
 
+    #[ORM\PrePersist]
+    public function setCreatedAt(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
     public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): void
+    #[ORM\PreUpdate]
+    public function setUpdatedAt(): void
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }
