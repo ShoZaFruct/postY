@@ -24,6 +24,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/AccountBundle/Domain/Entity'
                 prefix: 'App\AccountBundle\Domain\Entity'
                 alias: AccountBundle
+            PostBundle:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/PostBundle/Domain/Entity'
+                prefix: 'App\PostBundle\Domain\Entity'
+                alias: PostBundle
         controller_resolver:
             auto_mapping: false
 

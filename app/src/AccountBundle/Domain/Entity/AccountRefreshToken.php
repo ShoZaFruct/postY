@@ -5,21 +5,23 @@ declare(strict_types=1);
 namespace App\AccountBundle\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'account_refresh_token')]
 class AccountRefreshToken
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    private ?string $uuid;
 
     #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'refresh_tokens')]
-    #[ORM\JoinTable()]
+    #[ORM\JoinColumn(name: 'account_uuid', referencedColumnName: 'uuid', nullable: false)]
     private Account $account;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private string $refreshToken;
 
     #[ORM\Column(type: 'datetime')]
@@ -35,33 +37,21 @@ class AccountRefreshToken
         $this->expiresAt = $expiresAt;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getUuid(): ?string
     {
-        return $this->id;
+        return $this->uuid;
     }
 
-    /**
-     * @return Account
-     */
     public function getAccount(): Account
     {
         return $this->account;
     }
 
-    /**
-     * @return string
-     */
     public function getRefreshToken(): string
     {
         return $this->refreshToken;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
     public function getExpiresAt(): \DateTimeInterface
     {
         return $this->expiresAt;

@@ -91,6 +91,10 @@
       <path value="$PROJECT_DIR$/app/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/app/vendor/lcobucci/clock" />
       <path value="$PROJECT_DIR$/app/vendor/lexik/jwt-authentication-bundle" />
+      <path value="$PROJECT_DIR$/app/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/app/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/app/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/app/vendor/ramsey/uuid-doctrine" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

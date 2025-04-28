@@ -9,7 +9,7 @@ use App\AccountBundle\Domain\Repository\AccountRefreshTokenRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
-class AccountRefreshTokenRepository implements AccountRefreshTokenRepositoryInterface
+readonly class AccountRefreshTokenRepository implements AccountRefreshTokenRepositoryInterface
 {
     private EntityManagerInterface $entityManager;
 
