@@ -26,6 +26,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[OA\Tag(name: "Post")]
 class PostController extends AbstractController
 {
     #[IsGranted('ROLE_USER')]

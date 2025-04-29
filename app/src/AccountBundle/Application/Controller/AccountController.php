@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[OA\Tag(name: "Account")]
 class AccountController extends AbstractController
 {
     public function __construct(

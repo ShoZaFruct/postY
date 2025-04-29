@@ -8,3 +8,17 @@ nelmio_api_doc:
         default:
             path_patterns:
                 - ^/api/v1
+        account:
+            path_patterns:
+                - ^/api/v1/account
+            documentation:
+                info:
+                    title: Account API
+                    description: API for managing accounts
+        post:
+            path_patterns:
+                - ^/api/v1/post
+            documentation:
+                info:
+                    title: Post API
+                    description: API for managing posts

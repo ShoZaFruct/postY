@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[OA\Tag(name: "Account")]
 class AuthController extends AbstractController
 {
     #[OA\Post(
@@ -61,13 +62,4 @@ class AuthController extends AbstractController
             )
         );
     }
-//
-//    public function refreshToken(
-//
-//    ): JsonResponse
-//    {
-//        return $this->json(
-//
-//        );
-//    }
 }
