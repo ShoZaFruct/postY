@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
+    image: cr.yandex/crpep7qm6pofqelvuv51/php-posty
     container_name: posty_php
     volumes:
       - ./app:/var/www/html
