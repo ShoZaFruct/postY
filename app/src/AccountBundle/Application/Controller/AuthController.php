@@ -33,6 +33,15 @@ class AuthController extends AbstractController
                         new OA\Property('refreshToken', type: 'string'),
                     ]
                 ),
+
+            ),
+            new OA\Response(
+                response: 500,
+                description: 'Ошибка',
+                content: new OA\JsonContent(
+                    type: 'string',
+                    example: 'Текст ошибки',
+                ),
             )
         ]
     )]

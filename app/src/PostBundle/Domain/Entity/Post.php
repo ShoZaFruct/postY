@@ -11,7 +11,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Table(name: 'post')]
-class Post
+class Post implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -96,5 +96,16 @@ class Post
     public function setUpdatedAt(): void
     {
         $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'uuid' => $this->uuid,
+            'title' => $this->title,
+            'content' => $this->content,
+            'createdAt' => $this->createdAt,
+            'updatedAt' => $this->updatedAt,
+        ];
     }
 }

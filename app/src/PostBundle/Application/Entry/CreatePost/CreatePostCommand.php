@@ -11,8 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[OA\Schema(
     title: self::class,
     properties: [
-        new OA\Property(property: 'title', type: 'string', nullable: false),
-        new OA\Property(property: 'content', type: 'string', nullable: false),
+        new OA\Property(property: 'title', description: 'Заголовок поста', type: 'string', nullable: false),
+        new OA\Property(property: 'content', description: 'Контент поста', type: 'string', nullable: false),
     ]
 )]
 readonly class CreatePostCommand

@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\PostBundle\Domain\Service;
 
 use App\PostBundle\Domain\DTO\Request\CreatePostRequest;
+use App\PostBundle\Domain\DTO\Request\DeletePostByUuidAndAccountRequest;
 use App\PostBundle\Domain\DTO\Request\UpdatePostByUuidAndAccountRequest;
 use App\PostBundle\Domain\DTO\Response\CreatePostResponse;
 use App\PostBundle\Domain\DTO\Response\UpdatePostByUuidAndAccountResponse;
 use App\PostBundle\Domain\Entity\Post;
 use App\PostBundle\Domain\Exception\CreatePostException;
+use App\PostBundle\Domain\Exception\DeletePostException;
 use App\PostBundle\Domain\Repository\PostRepositoryInterface;
 
 readonly class PostService
@@ -64,5 +66,19 @@ readonly class PostService
             createdAt: $post->getCreatedAt(),
             updatedAt: $post->getUpdatedAt(),
         );
+    }
+
+    public function deleteByUuidAndAccount(DeletePostByUuidAndAccountRequest $request): void
+    {
+        $post = $this->postRepository->findByUuidAndAccountExact(
+            uuid: $request->getUuid(),
+            account: $request->getAccount()
+        );
+
+        try{
+            $this->postRepository->delete($post);
+        } catch (\Exception $exception) {
+            throw new DeletePostException($exception->getMessage(), $exception->getCode());
+        }
     }
 }

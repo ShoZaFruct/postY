@@ -15,6 +15,10 @@ interface PostRepositoryInterface
 
     public function findByAccount(Account $account): array;
 
+    public function findByFilter(array $filter, array $pagination = []): array;
+
+    public function countByFilter(array $filter): int;
+
     public function save(Post $post): void;
 
     public function update(Post $post): Post;
