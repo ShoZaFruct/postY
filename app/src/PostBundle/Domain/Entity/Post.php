@@ -87,7 +87,7 @@ class Post implements \JsonSerializable
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getUpdatedAt(): \DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
