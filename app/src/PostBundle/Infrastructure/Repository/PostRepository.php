@@ -91,8 +91,8 @@ readonly class PostRepository implements PostRepositoryInterface
 
         if (null !== $filter['username']) {
             $query->leftJoin('post.account', 'account')
-                ->andWhere('LOWER(account.username) LIKE :username')
-                ->setParameter('username', '%' . strtolower($filter['username']) . '%');
+                ->andWhere('account.username = :username')
+                ->setParameter('username', $filter['username']);
         }
 
         if (null !== $filter['createdAt']) {

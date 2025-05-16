@@ -101,11 +101,12 @@ class Post implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'uuid' => $this->uuid,
-            'title' => $this->title,
-            'content' => $this->content,
-            'createdAt' => $this->createdAt,
-            'updatedAt' => $this->updatedAt,
+            'uuid' => $this->getUuid(),
+            'title' => $this->getTitle(),
+            'content' => $this->getContent(),
+            'createdAt' => $this->getCreatedAt(),
+            'updatedAt' => $this->getUpdatedAt(),
+            'username' => $this->getAccount()->getUsername(),
         ];
     }
 }
