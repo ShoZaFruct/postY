@@ -10,25 +10,25 @@ services:
     volumes:
       - ./app:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
-    depends_on:
-      - db
+    #depends_on:
+    #  - db
     working_dir: /var/www/html
     networks:
       - posty_network
 
-  db:
-    image: postgres:15
-    container_name: posty_db
-    environment:
-      POSTGRES_DB: posty
-      POSTGRES_USER: posty_user
-      POSTGRES_PASSWORD: posty_password
-    volumes:
-      - ./docker/postgres/data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - posty_network
+  #db:
+  #  image: postgres:15
+  #  container_name: posty_db
+  #  environment:
+  #    POSTGRES_DB: posty
+  #    POSTGRES_USER: posty_user
+  #    POSTGRES_PASSWORD: posty_password
+  #  volumes:
+  #    - ./docker/postgres/data:/var/lib/postgresql/data
+  #  ports:
+  #    - "5432:5432"
+  #  networks:
+  #    - posty_network
 
   nginx:
     image: nginx:latest
